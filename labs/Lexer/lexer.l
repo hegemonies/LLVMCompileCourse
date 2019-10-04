@@ -1,64 +1,29 @@
-%option noyywrap
 %{
-    #include "Tokens.h"
-    
+    #include "TypeToken.hpp"
+    #include "Token.hpp"
+    #include "Location.hpp"
+
+    #include <vector>
+
+    using namespace std;
+
+    vector<*Token> tokensList;
+
+    Token *defineToken(TokenType tokenType) {
+        return new Token(tokenType, yytext, new Location(yylineno, 1));
+    }
 %}
+
+%option noyywrap
+%option yylineno
 
 %%
 
 
-[ \t\r\n]+ { } // ignore space, tabs and new lines
+"{" { tokensList.push_back(defineToken(TokenType.L_BRACE)); }
+"}" { tokensList.push_back(defineToken(TokenType.R_BRACE)); }
+"(" { tokensList.push_back(defineToken(TokenType.L_PAREN)); }
+")" { tokensList.push_back(defineToken(TokenType.R_PAREN)); }
 
-"{" { return L_BRACE; }
-"}" { return R_BRACE; }
-"(" { return L_PAREN; }
-")" { return R_PAREN; }
-"[" { return L_SQUARE; }
-"]" { return R_SQUARE; }
-
-"public" { return PUBLIC; }
-"private" { return PRIVATE; }
-
-"class" { return CLASS; }
-
-"int" { return INT; }
-"char" { return CHAR; }
-"void" { return VOID; }
-
-";" { return SEMICOLON; }
-":" { return COLON; }
-"," { return COMMA; }
-"." { return DOT; }
-
-"+" { return PLUS; }
-"-" { return MINUS; }
-"*" { return STAR; }
-"/" { return SLASH; }
-"%" { return PERCENT; }
-
-"=" { return EQUAL; }
-"==" { return EQUALEQUAL; }
-"<" { return LESS; }
-">" { return GREATER; }
-"!=" { return EXCLAIMEQUAL; }
-
-"&&" { return AMPAMP; }
-"||" { return PIPEPIPE; }
-
-"\"" { return DOUBLEQUOTES; }
-"\'" { return QUOTES; }
-
-"while" { return WHILE; }
-"if" { return IF; }
-"else" { return ELSE; }
-
-"static" { return STATIC; }
-"id" { return ID; }
-"new" { return NEW; }
-
-"System.out.println" { return PRINTLN; }
-"System.out.scanln" { return SCANLN; }
-
-\b([_]|[a-zA-Z])[a-zA-Z0-9_]+ { return ID; }
 
 %%

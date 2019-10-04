@@ -1,6 +1,6 @@
 #pragma once
 
-enum Token {
+enum TypeToken {
     L_BRACE = 1, // {
     R_BRACE,
     L_PAREN, // (
@@ -12,6 +12,9 @@ enum Token {
     PRIVATE,
 
     CLASS,
+
+    INTEGER,
+    // DOUBLE, OCTOINTEGER, HEXINTEGER, BININTEGER
 
     INT,
     CHAR,
@@ -51,5 +54,7 @@ enum Token {
     PRINTLN,
     SCANLN,
 
-    CONST_WORD
+    CONST_WORD,
+
+    UNKNOWN
 };
