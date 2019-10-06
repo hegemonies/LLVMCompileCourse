@@ -2,9 +2,9 @@
 #define yyHEADER_H 1
 #define yyIN_HEADER 1
 
-#line 6 "Lexer/Scaner.hpp"
+#line 6 "Lexer/Scanner.hpp"
 
-#line 8 "Lexer/Scaner.hpp"
+#line 8 "Lexer/Scanner.hpp"
 
 #define  YY_INT_ALIGNED short int
 
@@ -199,14 +199,11 @@ void *yyrealloc ( void *, yy_size_t  );
 void yyfree ( void *  );
 
 /* Begin user sect3 */
-#define YY_SKIP_YYWRAP
 
 #define yytext_ptr yytext
 #define YY_INTERACTIVE
 
 #include <FlexLexer.h>
-
-int yyFlexLexer::yywrap() { return 1; }
 
 #ifdef YY_HEADER_EXPORT_START_CONDITIONS
 #define INITIAL 0
@@ -419,9 +416,9 @@ static int yy_flex_strlen ( const char * );
 #undef yyTABLES_NAME
 #endif
 
-#line 29 "Lexer/lexer.l"
+#line 74 "Lexer/lexer.l"
 
 
-#line 426 "Lexer/Scaner.hpp"
+#line 423 "Lexer/Scanner.hpp"
 #undef yyIN_HEADER
 #endif /* yyHEADER_H */

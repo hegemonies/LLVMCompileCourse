@@ -18,6 +18,9 @@ enum TypeToken {
 
     INT,
     CHAR,
+    CONST_CHAR,
+    STRING,
+    CONST_STRING,
 
     RETURN,
 

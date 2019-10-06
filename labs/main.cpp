@@ -1,13 +1,23 @@
 #include <iostream>
-#include "Lexer/Scaner.hpp"
+#include <fstream>
+#include "Lexer/Lexer.hpp"
 
 using namespace std;
 
-int main() {
-    while (yylex()) { }
-    for (int i = 0; i < tokensList.size(); i++) {
-        cout << tokenList[i] << endl;
+int main(int argc, char** argv) {
+    Lexer lexer;
+    
+    if (argc < 2) {
+        cerr << "Please give me a gun (file)." << endl;
+        return -1;
     }
+
+    if (lexer.changeInputFile(argv[1]) == -1) {
+        cerr << "Error in open file\n";
+        return -1;
+    }
+    lexer.parseLexer();
+    lexer.printLexems();
 
     return 0;
 }

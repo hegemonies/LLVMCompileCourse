@@ -1,15 +1,17 @@
-all: makedir
-	# clang main.cpp -o main.o
-	# clang obj/*.o -o main
-	clang Lexer/Scaner.cpp main.cpp -o bin/main
+all: clean makedir flex
+	g++ -std=c++17 -Wall Lexer/*.cpp main.cpp -o bin/main -I Lexer/ -g -O0
 
 lexer: flex
 	# clang Lexer/*.cpp -o obj/lexer.o
 
 makedir:
-	mkdir -p bin/ obj/
+	mkdir -p bin/
 
 .PHONY: flex
 flex:
-	rm -f Lexer/Scaner.cpp Lexer/Scaner.hpp
-	flex --c++ -o Lexer/Scaner.cpp --header-file=Lexer/Scaner.hpp Lexer/lexer.l
+	rm -f Lexer/Scanner.cpp Lexer/Scanner.hpp
+	flex --c++ -o Lexer/Scanner.cpp --header-file=Lexer/Scanner.hpp Lexer/lexer.l
+
+.PHONY: clean
+clean:
+	rm -rf bin/
