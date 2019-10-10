@@ -27,6 +27,7 @@ void Lexer::printLexems() {
     }
 }
 
+// Dont work
 int Lexer::changeInputFile(string filename) {
     this->filename = filename;
     ifstream file(filename.c_str());
@@ -35,16 +36,7 @@ int Lexer::changeInputFile(string filename) {
         return -1;
     }
 
-    // while (!file.eof()) {
-    //     string tmp;
-	// 	getline(file, tmp);
-    //     cout << tmp << endl;
-	// }
-
-    // lex->yyrestart(&file);
-    // lex->yyrestart(fopen(filename.c_str()));
-    // lex->switch_streams(file, cout);
-
+    
     lex->yyrestart(file);
 
     return 0;

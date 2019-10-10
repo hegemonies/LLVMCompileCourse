@@ -17,11 +17,19 @@ extern int32_t yycolumno;
 
 class Lexer {
 
-    FlexLexer* lex = new yyFlexLexer;
+    FlexLexer* lex;
     vector<Token> tokensList;
     string filename;
 
 public:
+    Lexer() {
+        lex = new yyFlexLexer();
+    }
+
+    Lexer(ifstream *in) {
+        lex = new yyFlexLexer(*in, cout);
+    }
+
     TypeToken defineTypeToken(int intTokenType);
     void parseLexer();
     void printLexems();

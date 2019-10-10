@@ -4,20 +4,26 @@
 
 using namespace std;
 
-int main(int argc, char** argv) {
-    Lexer lexer;
-    
+int main(int argc, char** argv) {    
     if (argc < 2) {
         cerr << "Please give me a gun (file)." << endl;
         return -1;
     }
 
-    if (lexer.changeInputFile(argv[1]) == -1) {
-        cerr << "Error in open file\n";
+    ifstream* file = new ifstream(argv[1]);
+    if (!file->is_open()) {
+        cerr << "I can not open file. Sorry." << endl;
         return -1;
     }
+
+    Lexer lexer(file);
+
     lexer.parseLexer();
-    lexer.printLexems();
+    for (int i = 0; i < argc; ++i) {
+        if (string(argv[i]) == "--print-lexem") {
+            lexer.printLexems();
+        }
+    }
 
     return 0;
 }
