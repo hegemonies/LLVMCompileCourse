@@ -34,4 +34,5 @@ public:
     void parseLexer();
     void printLexems();
     int changeInputFile(string filename);
+    vector<Token> getTokenVector();
 };

@@ -1,5 +1,5 @@
 all: clean makedir flex
-	g++ -std=c++17 -Wall Lexer/*.cpp main.cpp -o bin/main -I Lexer/ -g -O0
+	clang++ -std=c++17 -Wall Lexer/*.cpp main.cpp -o bin/main -I Lexer/ -g -O0
 
 lexer: flex
 	# clang Lexer/*.cpp -o obj/lexer.o
@@ -15,3 +15,10 @@ flex:
 .PHONY: clean
 clean:
 	rm -rf bin/
+
+.PHONY: test
+test:
+	cxxtestgen --error-printer -o test_runner.cpp tests/TestLexer.hpp
+	clang++ -std=c++17 Lexer/*.cpp test_runner.cpp -o test_runner -g -O0
+	./test_runner
+	rm test_runner

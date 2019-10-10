@@ -41,3 +41,7 @@ int Lexer::changeInputFile(string filename) {
 
     return 0;
 }
+
+vector<Token> Lexer::getTokenVector() {
+    return this->tokensList;
+}
