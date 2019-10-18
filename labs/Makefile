@@ -22,3 +22,7 @@ test:
 	clang++ -std=c++17 Lexer/*.cpp test_runner.cpp -o test_runner -g -O0
 	./test_runner
 	rm test_runner
+
+.PHONY: tidy
+tidy:
+	clang-tidy  **/*.cpp -checks=-*,clang-analyzer-*,-clang-analyzer-cplusplus*
