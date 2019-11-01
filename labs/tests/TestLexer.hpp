@@ -10,6 +10,8 @@ using namespace std;
 
 class TestLexer : public CxxTest::TestSuite {
     string file_with_mockdata = "mock_data.java";
+    string file_with_output_lexer = "output_lexems.txt";
+    string file_with_data_for_lexer = "input_lexer.java";
 
 public:
     void testSimple() {
@@ -75,5 +77,58 @@ public:
             TS_ASSERT(mockVector[i].location->row == lexerVector[i].location->row);
             TS_ASSERT(mockVector[i].location->col == lexerVector[i].location->col);
         }
+    }
+
+    void testOnError() {
+        ofstream output_mockFile(file_with_mockdata);
+        if (!output_mockFile.is_open()) {
+            cerr << "I can not open file. Sorry." << endl;
+            return;
+        }
+
+        output_mockFile << "ID 'clas' <1;1>\n";
+
+        output_mockFile.close();
+
+        ofstream output_data_for_lexer(file_with_data_for_lexer);
+        if (!output_data_for_lexer.is_open()) {
+            cerr << "I can not open file. Sorry." << endl;
+            return;
+        }
+
+        output_data_for_lexer << "clas#s Hi {";
+
+        output_data_for_lexer.close();
+
+        ifstream* input_mockFile = new ifstream(file_with_data_for_lexer);
+        Lexer lexer(input_mockFile);
+        lexer.parseLexer();
+        lexer.printLexemsToFile();
+
+        // cout << "Got:\n";
+        // lexer.printLexems();
+
+        // cout << "\n\nExpected:\n";
+        // for (Token token : mockVector) {
+        //     cout << Helper::enumToString(token.type) << "\t\t";
+        //     cout << "\'" << token.value << "\'\t";
+        //     cout << "<" << token.location->toString() << ">" << "\t";
+        //     cout << endl;
+        // }
+
+        ifstream input_file_from_lexer(file_with_output_lexer);
+        ifstream input_file_from_mockdata(file_with_mockdata);
+
+        string line_from_lexer;
+        string line_from_mock;
+
+        while (getline(input_file_from_lexer, line_from_lexer)) {
+            while (getline(input_file_from_mockdata, line_from_mock)) {
+                TS_ASSERT(line_from_lexer == line_from_mock);
+            }
+        }
+
+        input_file_from_lexer.close();
+        input_file_from_mockdata.close();
     }
 };

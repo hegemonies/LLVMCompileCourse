@@ -35,4 +35,5 @@ public:
     void printLexems();
     int changeInputFile(string filename);
     vector<Token> getTokenVector();
+    void printLexemsToFile();
 };

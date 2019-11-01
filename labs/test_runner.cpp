@@ -29,9 +29,15 @@ CxxTest::StaticSuiteDescription suiteDescription_TestLexer( "tests/TestLexer.hpp
 
 static class TestDescription_suite_TestLexer_testSimple : public CxxTest::RealTestDescription {
 public:
- TestDescription_suite_TestLexer_testSimple() : CxxTest::RealTestDescription( Tests_TestLexer, suiteDescription_TestLexer, 15, "testSimple" ) {}
+ TestDescription_suite_TestLexer_testSimple() : CxxTest::RealTestDescription( Tests_TestLexer, suiteDescription_TestLexer, 17, "testSimple" ) {}
  void runTest() { suite_TestLexer.testSimple(); }
 } testDescription_suite_TestLexer_testSimple;
+
+static class TestDescription_suite_TestLexer_testOnError : public CxxTest::RealTestDescription {
+public:
+ TestDescription_suite_TestLexer_testOnError() : CxxTest::RealTestDescription( Tests_TestLexer, suiteDescription_TestLexer, 82, "testOnError" ) {}
+ void runTest() { suite_TestLexer.testOnError(); }
+} testDescription_suite_TestLexer_testOnError;
 
 #include <cxxtest/Root.cpp>
 const char* CxxTest::RealWorldDescription::_worldName = "cxxtest";

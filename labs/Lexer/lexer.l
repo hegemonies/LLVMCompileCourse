@@ -71,6 +71,8 @@ int32_t yycolumno = 0;
 \".*\" { yycolumno += yyleng; return CONST_STRING; }
 \'.*\' { yycolumno += yyleng; return CONST_CHAR; }
 
+. { yycolumno += yyleng; return UNKNOWN; }
+
 %%
 
 int yyFlexLexer::yywrap() {

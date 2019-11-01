@@ -15,6 +15,11 @@ void Lexer::parseLexer() {
         tokensList.push_back(token);
 
         tokenType = lex->yylex();
+
+        if (tokenType == TypeToken(UNKNOWN)) {
+            cerr << "Lexer error: UNKNOWN lexem: " << lexem  << lex->YYText() << endl;
+            return;
+        }
     }
 }
 
@@ -44,4 +49,21 @@ int Lexer::changeInputFile(string filename) {
 
 vector<Token> Lexer::getTokenVector() {
     return this->tokensList;
+}
+
+void Lexer::printLexemsToFile() {
+    ofstream output_file("output_lexems.txt");
+    if (!output_file.is_open()) {
+        cerr << "I can not open file. Sorry." << endl;
+        return;
+    }
+
+    for (Token token : this->tokensList) {
+        output_file << Helper::enumToString(token.type) << " ";
+        output_file << "\'" << token.value << "\' ";
+        output_file << "<" << this->filename << token.location->toString() << ">";
+        output_file << endl;
+    }
+
+    output_file.close();
 }

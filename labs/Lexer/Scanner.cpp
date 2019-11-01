@@ -330,8 +330,8 @@ typedef flex_uint8_t YY_CHAR;
 	(yy_hold_char) = *yy_cp; \
 	*yy_cp = '\0'; \
 	(yy_c_buf_p) = yy_cp;
-#define YY_NUM_RULES 46
-#define YY_END_OF_BUFFER 47
+#define YY_NUM_RULES 47
+#define YY_END_OF_BUFFER 48
 /* This struct is not used in this scanner,
    but its presence is necessary. */
 struct yy_trans_info
@@ -341,7 +341,7 @@ struct yy_trans_info
 	};
 static const flex_int16_t yy_accept[124] =
     {   0,
-        0,    0,   47,   46,   40,   41,   39,   46,   46,   22,
+        0,    0,   48,   46,   40,   41,   39,   46,   46,   22,
        46,   46,    3,    4,   20,   18,   16,   19,   17,   21,
        43,   15,   14,   25,   23,   26,   46,   46,    5,    6,
        46,   46,   46,   46,   46,   46,   46,   46,    1,   46,
@@ -516,11 +516,11 @@ static const flex_int16_t yy_chk[322] =
     } ;
 
 /* Table of booleans, true if rule could match eol. */
-static const flex_int32_t yy_rule_can_match_eol[47] =
+static const flex_int32_t yy_rule_can_match_eol[48] =
     {   0,
 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 
-    0, 1, 0, 0, 0, 0, 0,     };
+    0, 1, 0, 0, 0, 0, 0, 0,     };
 
 /* The intent behind this definition is that it'll catch
  * any uses of REJECT which flex missed.
@@ -969,9 +969,14 @@ YY_RULE_SETUP
 case 46:
 YY_RULE_SETUP
 #line 74 "Lexer/lexer.l"
+{ yycolumno += yyleng; return UNKNOWN; }
+	YY_BREAK
+case 47:
+YY_RULE_SETUP
+#line 76 "Lexer/lexer.l"
 ECHO;
 	YY_BREAK
-#line 975 "Lexer/Scanner.cpp"
+#line 980 "Lexer/Scanner.cpp"
 case YY_STATE_EOF(INITIAL):
 	yyterminate();
 
@@ -1943,7 +1948,7 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 74 "Lexer/lexer.l"
+#line 76 "Lexer/lexer.l"
 
 
 int yyFlexLexer::yywrap() {
